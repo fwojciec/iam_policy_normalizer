@@ -24,10 +24,10 @@ def _to_list_of_strings(raw: Optional[StrOrListStr], to_lower: bool = False) -> 
     return sorted([item.lower() for item in raw] if to_lower else raw)
 
 
-def _normalize_condition_value(val: Union[ConditionValue, List[ConditionValue]]) -> List[str]:
+def _normalize_condition_value(val: Union[ConditionValue, List[ConditionValue]]) -> Union[str, List[str]]:
     if isinstance(val, list):
         return [v if isinstance(v, str) else json.dumps(v) for v in val]
-    return [val if isinstance(val, str) else json.dumps(val)]
+    return val if isinstance(val, str) else json.dumps(val)
 
 
 class NormalizedPrincipal(PolicyModel):
@@ -88,10 +88,9 @@ class Statement(StatementModel):
     def _normalize_principal(self) -> Optional[NormalizedPrincipal]:
         if self.Principal is None:
             return None
-        elif self.Principal == "*":
-            return NormalizedPrincipal(AWS=["*"])
-        else:
+        if isinstance(self.Principal, Principal):
             return self.Principal.normalize()
+        return NormalizedPrincipal(AWS=[self.Principal])
 
     def _normalize_condition(self) -> Optional[NormalizedCondition]:
         if self.Condition is None:

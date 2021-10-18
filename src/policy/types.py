@@ -69,8 +69,8 @@ ConditionOperator = Literal[
 
 ConditionValue = Union[StrictStr, StrictInt, StrictFloat, StrictBool]
 
-Condition = Dict[ConditionOperator, Dict[StrictStr, Union[ConditionValue, List[ConditionValue]]]]
+Condition = Dict[StrictStr, Dict[StrictStr, Union[ConditionValue, List[ConditionValue]]]]
 
-NormalizedCondition = Dict[ConditionOperator, Dict[StrictStr, List[StrictStr]]]
+NormalizedCondition = Dict[StrictStr, Dict[StrictStr, Union[StrictStr, List[StrictStr]]]]
 
 StrictStrList = List[StrictStr]

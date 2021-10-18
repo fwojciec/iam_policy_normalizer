@@ -115,7 +115,7 @@ def test_parse_policy():
                 "Statement": [
                     {
                         "Action": ["s3:*"],
-                        "Condition": {"Bool": {"aws:securetransport": ["false"]}},
+                        "Condition": {"Bool": {"aws:securetransport": "false"}},
                         "Effect": "Deny",
                         "Principal": {"AWS": ["*"]},
                         "Resource": ["arn:aws:s3:::scranton-bucket", "arn:aws:s3:::scranton-bucket/*"],
@@ -210,7 +210,7 @@ def test_parse_policy():
                         "Effect": "Allow",
                         "Action": "s3:putobject",
                         "Resource": "*",
-                        "Condition": {"StringEquals": {"AWS:Username": True}},
+                        "Condition": {"StringEquals": {"AWS:Username": [True, 20.15]}},
                     }
                 ],
             },
@@ -221,7 +221,7 @@ def test_parse_policy():
                         "Effect": "Allow",
                         "Action": ["s3:putobject"],
                         "Resource": ["*"],
-                        "Condition": {"StringEquals": {"aws:username": ["true"]}},
+                        "Condition": {"StringEquals": {"aws:username": ["true", "20.15"]}},
                     }
                 ],
             },
