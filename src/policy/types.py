@@ -21,6 +21,8 @@ ConditionOperator = Literal[
     "StringNotEqualsIgnoreCase",
     "StringNotEqualsIgnoreCaseIfExists",
     "StringLike",
+    "ForAllValues:StringLike",
+    "ForAnyValue:StringLike",
     "StringLikeIfExists",
     "StringNotLike",
     "StringNotLikeIfExists",
